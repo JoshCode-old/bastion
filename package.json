@@ -1,0 +1,12 @@
+{
+  "name": "b4st10n",
+  "version": "0.1.0",
+  "description": "A Discord bot for certain Overwatch interactions",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "node src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Slik",
+  "license": "Apache-2.0"
+}
