@@ -1,8 +1,7 @@
 {
   "debug": {
     "enabled": false,
-    "debugServer": "optional server id of debug server"
+    "debugChannel": "optional channel id of debug channel"
   },
-  "productionServer": "server id of actual server",
   "token": "bot secret token"
 }
