@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as Discord from "discord.js";
-import {Collection, Role, Snowflake} from "discord.js";
 import {BotCommand} from "./commands/BotCommand";
 import {AboutCommand} from "./commands/AboutCommand";
 import {ResponseEmbed} from "./util/ResponseEmbed";
@@ -19,7 +18,7 @@ if (config.debug.enabled)
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.user.setPresence({status:'online', game: {name: 'with Ganymede'}});
+	client.user.setPresence({status: 'online', game: {name: 'with Ganymede'}});
 });
 
 enabledCommands.push(new AboutCommand());
