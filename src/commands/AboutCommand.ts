@@ -16,6 +16,4 @@ export class AboutCommand extends BotCommand {
 		response.complete(true);
 		msg.channel.send(response);
 	}
-
-
 }
