@@ -1,6 +1,6 @@
 import {RichEmbed, RichEmbedOptions} from "discord.js";
 
-export class EmbedResponse extends RichEmbed {
+export class ResponseEmbed extends RichEmbed {
 	private executionStart: number;
 	private executionEnd: number;
 

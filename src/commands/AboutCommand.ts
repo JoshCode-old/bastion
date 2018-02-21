@@ -1,6 +1,6 @@
 import {BotCommand} from "./BotCommand";
 import {Message} from "discord.js";
-import {EmbedResponse} from "../util/EmbedResponse";
+import {ResponseEmbed} from "../util/ResponseEmbed";
 
 export class AboutCommand extends BotCommand {
 	commandName: string = "!about";
@@ -8,12 +8,14 @@ export class AboutCommand extends BotCommand {
 	maxArguments: number = 0;
 
 	public handle(msg: Message) {
-		let embed = new EmbedResponse();
+		let response = new ResponseEmbed();
 
-		embed.addField("Version", process.env.npm_package_version, false);
-		embed.addField("Repository", "https://www.github.com/JoshCode/B4ST10N", false);
+		response.addField("Version", process.env.npm_package_version, false);
+		response.addField("Repository", "https://www.github.com/JoshCode/B4ST10N", false);
 
-		embed.complete(true);
-		msg.channel.send(embed);
+		response.complete(true);
+		msg.channel.send(response);
 	}
+
+
 }
