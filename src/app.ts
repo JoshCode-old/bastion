@@ -1,9 +1,10 @@
 import * as fs from "fs";
 import * as Discord from "discord.js";
+import {Collection, Role, Snowflake} from "discord.js";
 import {BotCommand} from "./commands/BotCommand";
 import {AboutCommand} from "./commands/AboutCommand";
-import {Collection, Role, Snowflake} from "discord.js";
 import {ResponseEmbed} from "./util/ResponseEmbed";
+import {InfoCommand} from "./commands/InfoCommand";
 
 const client = new Discord.Client();
 
@@ -17,17 +18,19 @@ if (config.debug.enabled)
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	let roles: Collection<Snowflake, Role> = client.guilds.get("406877268556644363").roles;
-	console.log(roles.find("name", "Moderator").members);
 });
 
 enabledCommands.push(new AboutCommand());
+enabledCommands.push(new InfoCommand());
 
 client.on('message', (msg) => {
+	/**
+	 * Debug commands
+	 */
 	if (config.debug.enabled) {
 		if (msg.content == '!enable') {
 			if (msg.guild.roles.find("name", "Moderator").members.has(msg.author.id)) {
-				if(enabledChannels.indexOf(msg.channel.id) > -1) {
+				if (enabledChannels.indexOf(msg.channel.id) > -1) {
 					let response = new ResponseEmbed();
 					response.setDescription("Bot was already enabled on this channel");
 					response.complete(false);
@@ -68,6 +71,10 @@ client.on('message', (msg) => {
 			}
 		}
 	}
+
+	/**
+	 * Enabled commands
+	 */
 	if (enabledChannels.includes(msg.channel.id) || config.debug.enabled === false) {
 		for (let i = 0; i < enabledCommands.length; i++) {
 			if (msg.content.startsWith(enabledCommands[i].commandName))
