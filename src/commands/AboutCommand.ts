@@ -4,6 +4,8 @@ import {EmbedResponse} from "../util/EmbedResponse";
 
 export class AboutCommand extends BotCommand {
 	commandName: string = "!about";
+	minArguments: number = 0;
+	maxArguments: number = 0;
 
 	public handle(msg: Message) {
 		let embed = new EmbedResponse();
