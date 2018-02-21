@@ -5,6 +5,7 @@ import {BotCommand} from "./commands/BotCommand";
 import {AboutCommand} from "./commands/AboutCommand";
 import {ResponseEmbed} from "./util/ResponseEmbed";
 import {InfoCommand} from "./commands/InfoCommand";
+import {EditCommand} from "./commands/EditCommand";
 
 const client = new Discord.Client();
 
@@ -22,6 +23,7 @@ client.on('ready', () => {
 
 enabledCommands.push(new AboutCommand());
 enabledCommands.push(new InfoCommand());
+enabledCommands.push(new EditCommand());
 
 client.on('message', (msg) => {
 	/**
