@@ -19,6 +19,7 @@ if (config.debug.enabled)
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
+	client.user.setPresence({status:'online', game: {name: 'with Ganymede'}});
 });
 
 enabledCommands.push(new AboutCommand());
