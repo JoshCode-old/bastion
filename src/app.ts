@@ -17,6 +17,8 @@ client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
+enabledCommands.push(new AboutCommand());
+
 client.on('message', msg => {
 	if(config.debug.enabled) {
 		if (msg.content == '!enable') {
@@ -32,10 +34,7 @@ client.on('message', msg => {
 	if (enabledChannels.includes(msg.channel.id) || config.debug.enabled === false) {
 		for (let i = 0; i < enabledCommands.length; i++) {
 			if (msg.content === enabledCommands[i].commandName)
-				enabledCommands[i].handle(msg)
-		}
-		if (msg.content === 'ping') {
-			msg.reply('pong');
+				enabledCommands[i].runCommand(msg);
 		}
 	}
 });
