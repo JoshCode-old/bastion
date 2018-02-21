@@ -24,7 +24,7 @@ export class InfoCommand extends BotCommand {
 			const username = args[0].replace("#", "-");
 			const options = {
 				hostname: 'owapi.net',
-				path: `/api/v3/u/${username}/stats`,
+				path: `/api/v3/u/${encodeURIComponent(username)}/stats`,
 				method: 'GET',
 				headers: {
 					'User-Agent': `nl.codefox.bastion ${process.env.npm_package_version}`
