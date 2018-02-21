@@ -1,9 +1,14 @@
 import {Message} from "discord.js";
 
 abstract class BotCommand {
-	abstract commandName :string;
+	abstract commandName: string;
 
-	abstract handle(msg : Message);
+	abstract handle(msg: Message);
+
+	public runCommand(msg: Message) {
+		this.handle(msg);
+	}
+
 }
 
 export {BotCommand};

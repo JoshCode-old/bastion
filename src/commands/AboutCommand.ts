@@ -1,12 +1,17 @@
 import {BotCommand} from "./BotCommand";
-import {Message, RichEmbed} from "discord.js";
+import {Message} from "discord.js";
+import {EmbedResponse} from "../util/EmbedResponse";
 
 export class AboutCommand extends BotCommand {
 	commandName: string = "!about";
 
-	public handle(msg : Message) {
-		let embed = new RichEmbed();
+	public handle(msg: Message) {
+		let embed = new EmbedResponse();
 
+		embed.addField("Version", process.env.npm_package_version, false);
+		embed.addField("Repository", "https://www.github.com/JoshCode/B4ST10N", false);
+
+		embed.complete(true);
 		msg.channel.send(embed);
 	}
 }
