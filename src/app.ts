@@ -6,6 +6,7 @@ import {ResponseEmbed} from "./util/ResponseEmbed";
 import {InfoCommand} from "./commands/InfoCommand";
 import {EditCommand} from "./commands/EditCommand";
 import * as mongoose from "mongoose";
+import {RegisterCommand} from "./commands/RegisterCommand";
 mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
 const client = new Discord.Client();
@@ -26,6 +27,7 @@ client.on('ready', () => {
 enabledCommands.push(new AboutCommand());
 enabledCommands.push(new InfoCommand());
 enabledCommands.push(new EditCommand());
+enabledCommands.push(new RegisterCommand());
 
 client.on('message', (msg) => {
 	/**
