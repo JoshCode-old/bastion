@@ -2,6 +2,7 @@
   "name": "b4st10n",
   "version": "0.1.0",
   "description": "A Discord bot for certain Overwatch interactions",
+  "repository": "https://www.github.com/JoshCode/B4ST10N",
   "main": "src/app.js",
   "scripts": {
     "start": "node build/app.js",
@@ -11,8 +12,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "discord.js": "^11.3.0",
-    "mongoose": "^5.0.7",
-    "typescript": "^2.7.2"
+    "mongoose": "^5.0.7"
   },
   "devDependencies": {
     "@types/node": "^9.4.6",
