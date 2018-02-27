@@ -5,6 +5,8 @@ import {AboutCommand} from "./commands/AboutCommand";
 import {ResponseEmbed} from "./util/ResponseEmbed";
 import {InfoCommand} from "./commands/InfoCommand";
 import {EditCommand} from "./commands/EditCommand";
+import * as mongoose from "mongoose";
+mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
 const client = new Discord.Client();
 
