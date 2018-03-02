@@ -7,6 +7,7 @@ import {InfoCommand} from "./commands/InfoCommand";
 import {EditCommand} from "./commands/EditCommand";
 import * as mongoose from "mongoose";
 import {RegisterCommand} from "./commands/RegisterCommand";
+import {UpdateCommand} from "./commands/UpdateCommand";
 mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
 const client = new Discord.Client();
@@ -22,12 +23,14 @@ if (config.debug.enabled)
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 	client.user.setPresence({status: 'online', game: {name: 'with Ganymede'}});
+	enabledCommands.push(new UpdateCommand(client.guilds.find("id", "406877268556644363")));
 });
 
 enabledCommands.push(new AboutCommand());
 enabledCommands.push(new InfoCommand());
 enabledCommands.push(new EditCommand());
 enabledCommands.push(new RegisterCommand());
+
 
 client.on('message', (msg) => {
 	/**
