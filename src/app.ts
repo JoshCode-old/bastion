@@ -11,7 +11,7 @@ import {UpdateCommand} from "./commands/UpdateCommand";
 mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
 const client = new Discord.Client();
-let version = null;
+export let version = null;
 if(process.env.npm_package_version !== undefined) {
 	version = process.env.npm_package_version;
 } else {

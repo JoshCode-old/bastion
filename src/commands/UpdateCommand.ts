@@ -38,7 +38,6 @@ export class UpdateCommand extends BotCommand {
 		let response = new ResponseEmbed();
 		let sentMessage = null;
 		response.setDescription("Your request is being processed");
-		response.complete(false);
 		response.setColor("#0000FF");
 		let promises = [];
 		promises.push(msg.channel.send(response).then((message: Message) => {
@@ -53,6 +52,9 @@ export class UpdateCommand extends BotCommand {
 			let role: Snowflake = null;
 			let tier = json.eu.stats.competitive.overall_stats.tier;
 			switch (tier) {
+				case null:
+					role = this.guildRoles.notPlacedRole;
+					break;
 				case "bronze":
 					role = this.guildRoles.bronzeRole;
 					break;
@@ -86,7 +88,11 @@ export class UpdateCommand extends BotCommand {
 			promises.push(author.removeRole(this.guildRoles.notPlacedRole));
 			Promise.all(promises).then(() => {
 				msg.guild.members.find("id", msg.author.id).addRole(role).then(() => {
-					response.setDescription(`Set your colour to **${tier.charAt(0).toUpperCase()}${tier.substring(1, tier.length)}**`);
+					if(tier === null) {
+						response.setDescription(`Set your colour to **Not placed**`);
+					} else {
+						response.setDescription(`Set your colour to **${tier.charAt(0).toUpperCase()}${tier.substring(1, tier.length)}**`);
+					}
 					response.complete(true);
 					sentMessage.edit(response);
 				});
