@@ -8,6 +8,9 @@ import {EditCommand} from "./commands/EditCommand";
 import * as mongoose from "mongoose";
 import {RegisterCommand} from "./commands/RegisterCommand";
 import {UpdateCommand} from "./commands/UpdateCommand";
+
+process.title = "B4ST10N";
+
 mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
 const client = new Discord.Client();

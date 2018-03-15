@@ -5,7 +5,9 @@
   "repository": "https://www.github.com/JoshCode/B4ST10N",
   "main": "src/app.js",
   "scripts": {
-    "start": "node build/app.js",
+    "start": "node build/app.js &",
+    "stop": "pkill --signal SIGINT B4ST10N",
+    "compile": "tsc -w > /dev/null",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joshua Slik",
