@@ -10,6 +10,12 @@ import {RegisterCommand} from "./commands/RegisterCommand";
 import {UpdateCommand} from "./commands/UpdateCommand";
 
 process.title = "B4ST10N";
+process.on("SIGINT", () => {
+	console.log("Received SIGINT");
+});
+process.on("SIGTERM", () => {
+	console.log("Received SIGTERM");
+});
 
 mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
