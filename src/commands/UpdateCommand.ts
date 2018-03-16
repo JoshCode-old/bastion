@@ -46,6 +46,16 @@ export class UpdateCommand extends BotCommand {
 
 		let args: string[] = msg.content.split(" ");
 		args.splice(0, 1);
+
+		if(args.length !== 1) {
+			response.setDescription("Incorrect number of arguments, `!update` without username functionality coming soon");
+			response.complete(false);
+			Promise.all(promises).then(() => {
+				sentMessage.edit(response);
+			})
+			return;
+		}
+
 		const username = args[0].replace("#", "-");
 
 		promises.push(OWAPI.requestStats(username).then((json) => {
