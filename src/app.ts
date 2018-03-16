@@ -32,7 +32,7 @@ if(process.env.npm_package_version !== undefined) {
 console.log(`B4ST10N v${version} starting up!`);
 
 // Connect with database
-mongoose.connect('mongodb://192.168.0.3:27017/B4ST10N');
+mongoose.connect(config.databaseURL);
 
 const client = new Discord.Client();
 
