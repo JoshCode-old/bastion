@@ -5,8 +5,8 @@ export class OWAPI {
 	private static url: string = "https://owapi.net";
 	private static userAgent: string = `nl.codefox.bastion v${process.env.npm_package_version}`;
 
-	public static requestStats(username: string): Promise<OWAPIResponseStats> {
-		return this.request(`/api/v3/u/${encodeURIComponent(username)}/stats`);
+	public static requestStats(username: String): Promise<OWAPIResponseStats> {
+		return this.request(`/api/v3/u/${encodeURIComponent(username.toString())}/stats`);
 	}
 
 	private static request(endpoint: string): Promise<OWAPIResponseStats> {
