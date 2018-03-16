@@ -1,7 +1,18 @@
-import * as mongoose from "mongoose";
-import {Schema} from "mongoose";
+import {Document, Model, Schema, model} from "mongoose";
 
-const userDataSchema = new Schema({
+interface IUserData {
+	userID: number,
+	registeredOn: string,
+	battletag: string,
+	skillTier?: string,
+	skillRating?: number,
+	skillRatingHistory?: [{date: string, skillRating: number}]
+}
+
+interface IUserDataModel extends IUserData, Document {
+}
+
+const UserDataSchema = new Schema({
 	userID: {type: Number, required: true, unique: true},
 	registeredOn: {type: Date, required: true},
 	battletag: {type: String, required: true},
@@ -10,6 +21,6 @@ const userDataSchema = new Schema({
 	skillRatingHistory: [{date: Date, skillRating: Number}]
 }, {collection: "user-data"});
 
-const UserData = mongoose.model("UserData", userDataSchema);
+const UserData: Model<IUserDataModel> = model("UserData", UserDataSchema);
 
-export {UserData};
+export {IUserData, IUserDataModel, UserDataSchema, UserData};
