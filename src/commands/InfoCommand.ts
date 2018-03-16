@@ -22,10 +22,10 @@ export class InfoCommand extends BotCommand {
 
 		let args: string[] = msg.content.split(" ");
 		args.splice(0, 1);
-		if(args.length !== 1) {
+		if (args.length !== 1) {
 			console.log("!info command without arguments");
 			UserData.findOne({userID: msg.author.id}, (err, doc) => {
-				if(err) {
+				if (err) {
 					console.log(err);
 					response.setDescription("Unexpected error");
 					response.complete(false);
@@ -33,19 +33,24 @@ export class InfoCommand extends BotCommand {
 						sentMessage.edit(response);
 					});
 					return;
+				} else if (doc === null) {
+					response.setDescription("You are not registered, please execute `!register <battletag>` first");
+					response.complete(false);
+
+					Promise.all(promises).then(() => {
+						sentMessage.edit(response);
+					});
+				} else {
+					const username = doc.battletag;
+
+					promises.push(this.constructResponse(username).then((res) => {
+						response = res;
+					}));
+
+					Promise.all(promises).then(() => {
+						sentMessage.edit(response);
+					});
 				}
-				console.log("!info command without arguments successful");
-
-				const username = doc.battletag;
-
-				promises.push(this.constructResponse(username).then((res) => {
-					response = res;
-				}));
-
-				Promise.all(promises).then(() => {
-					sentMessage.edit(response);
-				});
-				return;
 			});
 		} else {
 			const username = args[0];
@@ -55,7 +60,6 @@ export class InfoCommand extends BotCommand {
 			}));
 
 			Promise.all(promises).then(() => {
-				console.log("Completed !info");
 				sentMessage.edit(response);
 			})
 		}
