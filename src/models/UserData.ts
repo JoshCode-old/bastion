@@ -8,6 +8,8 @@ const userDataSchema = new Schema({
 	skillTier: String,
 	skillRating: Number,
 	skillRatingHistory: [{date: Date, skillRating: Number}]
-},{collection: "user-data"});
+}, {collection: "user-data"});
 
-export const UserData = mongoose.model("UserData", userDataSchema);
+const UserData = mongoose.model("UserData", userDataSchema);
+
+export {UserData};

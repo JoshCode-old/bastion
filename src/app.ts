@@ -1,14 +1,15 @@
 import * as fs from "fs";
+import * as mongoose from "mongoose";
 import * as Discord from "discord.js";
 import {BotCommand} from "./commands/BotCommand";
 import {AboutCommand} from "./commands/AboutCommand";
 import {ResponseEmbed} from "./util/ResponseEmbed";
 import {InfoCommand} from "./commands/InfoCommand";
 import {EditCommand} from "./commands/EditCommand";
-import * as mongoose from "mongoose";
 import {RegisterCommand} from "./commands/RegisterCommand";
 import {UpdateCommand} from "./commands/UpdateCommand";
 
+// Set process title and exit handlers
 process.title = "B4ST10N";
 process.on("SIGINT", () => {
 	console.log("Received SIGINT");
@@ -17,19 +18,23 @@ process.on("SIGTERM", () => {
 	console.log("Received SIGTERM");
 });
 
-mongoose.connect('mongodb://localhost:27017/B4ST10N');
 
-const client = new Discord.Client();
+// Load config
+let config = JSON.parse(fs.readFileSync('./config/config.json', 'utf8'));
+
+// Set process version number
 export let version = null;
 if(process.env.npm_package_version !== undefined) {
 	version = process.env.npm_package_version;
 } else {
 	version = JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
 }
+console.log(`B4ST10N v${version} starting up!`);
 
-console.log(version);
+// Connect with database
+mongoose.connect('mongodb://192.168.0.3:27017/B4ST10N');
 
-let config = JSON.parse(fs.readFileSync('./config/config.json', 'utf8'));
+const client = new Discord.Client();
 
 let enabledChannels: string[] = [];
 let enabledCommands: BotCommand[] = [];
