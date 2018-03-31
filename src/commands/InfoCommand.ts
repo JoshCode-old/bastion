@@ -40,6 +40,7 @@ export class InfoCommand extends BotCommand {
 					Promise.all(promises).then(() => {
 						sentMessage.edit(response);
 					});
+					return;
 				} else {
 					const username = doc.battletag;
 
