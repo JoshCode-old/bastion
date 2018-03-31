@@ -1,7 +1,7 @@
 import {Document, Model, Schema, model} from "mongoose";
 
 interface IUserData {
-	userID: number,
+	userID: string,
 	registeredOn: string,
 	battletag: string,
 	skillTier?: string,
@@ -13,7 +13,7 @@ interface IUserDataModel extends IUserData, Document {
 }
 
 const UserDataSchema = new Schema({
-	userID: {type: Number, required: true, unique: true},
+	userID: {type: String, required: true, unique: true},
 	registeredOn: {type: Date, required: true},
 	battletag: {type: String, required: true},
 	skillTier: String,

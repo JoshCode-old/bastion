@@ -4,11 +4,14 @@ import {OWAPI} from "../util/owapi/owapi";
 import {ResponseEmbed} from "../util/ResponseEmbed";
 import {StatusCodeError} from "request-promise-native/errors";
 import {UserData} from "../models/UserData";
+import {client} from "../app";
 
 export class UpdateCommand extends BotCommand {
 	commandName: string = "!update";
 	maxArguments: number;
 	minArguments: number;
+
+	guild: Guild;
 
 	guildRoles: {
 		bronzeRole: string,
@@ -23,6 +26,7 @@ export class UpdateCommand extends BotCommand {
 
 	constructor(guild: Guild) {
 		super();
+		this.guild = guild;
 		this.guildRoles = {
 			bronzeRole: guild.roles.find("name", "Bronze").id,
 			silverRole: guild.roles.find("name", "Silver").id,
@@ -158,6 +162,58 @@ export class UpdateCommand extends BotCommand {
 		});
 
 		return result;
+	}
+
+	public updateUser(battletag: String, discordID: String) {
+		let promises = [];
+
+		console.log(`Updating ${discordID}`);
+
+		battletag = battletag.replace("#", "-");
+
+		OWAPI.requestStats(battletag).then((json) => {
+			let role: Snowflake = null;
+			let tier = json.eu.stats.competitive.overall_stats.tier;
+			switch (tier) {
+				case null:
+					role = this.guildRoles.notPlacedRole;
+					break;
+				case "bronze":
+					role = this.guildRoles.bronzeRole;
+					break;
+				case "silver":
+					role = this.guildRoles.silverRole;
+					break;
+				case "gold":
+					role = this.guildRoles.goldRole;
+					break;
+				case "platinum":
+					role = this.guildRoles.platinumRole;
+					break;
+				case "diamond":
+					role = this.guildRoles.diamondRole;
+					break;
+				case "master":
+					role = this.guildRoles.masterRole;
+					break;
+				case "grandmaster":
+					role = this.guildRoles.grandMasterRole;
+					break;
+			}
+			let author = this.guild.members.find("id", discordID);
+			promises.push(author.removeRole(this.guildRoles.bronzeRole));
+			promises.push(author.removeRole(this.guildRoles.silverRole));
+			promises.push(author.removeRole(this.guildRoles.goldRole));
+			promises.push(author.removeRole(this.guildRoles.platinumRole));
+			promises.push(author.removeRole(this.guildRoles.diamondRole));
+			promises.push(author.removeRole(this.guildRoles.masterRole));
+			promises.push(author.removeRole(this.guildRoles.grandMasterRole));
+			promises.push(author.removeRole(this.guildRoles.notPlacedRole));
+			Promise.all(promises).then(() => {
+				author.addRole(role);
+				console.log(`Updated '${author.displayName}' for account '${battletag}'`)
+			});
+		});
 	}
 
 }

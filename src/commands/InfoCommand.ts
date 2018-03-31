@@ -24,6 +24,7 @@ export class InfoCommand extends BotCommand {
 		args.splice(0, 1);
 		if (args.length !== 1) {
 			console.log("!info command without arguments");
+			console.log(msg.author.id);
 			UserData.findOne({userID: msg.author.id}, (err, doc) => {
 				if (err) {
 					console.log(err);
@@ -43,6 +44,8 @@ export class InfoCommand extends BotCommand {
 					return;
 				} else {
 					const username = doc.battletag;
+					console.log(`UserID: ${doc.userID.toString()}`);
+					console.log(msg.author.id === doc.userID.toString());
 
 					promises.push(this.constructResponse(username).then((res) => {
 						response = res;

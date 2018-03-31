@@ -8,6 +8,7 @@ import {InfoCommand} from "./commands/InfoCommand";
 import {EditCommand} from "./commands/EditCommand";
 import {RegisterCommand} from "./commands/RegisterCommand";
 import {UpdateCommand} from "./commands/UpdateCommand";
+import {UpdateRegistered} from "./util/UpdateRegistered";
 
 // Set process title and exit handlers
 process.title = "B4ST10N";
@@ -34,7 +35,7 @@ console.log(`B4ST10N v${version} starting up!`);
 // Connect with database
 mongoose.connect(config.databaseURL);
 
-const client = new Discord.Client();
+export const client = new Discord.Client();
 
 let enabledChannels: string[] = [];
 let enabledCommands: BotCommand[] = [];
@@ -46,6 +47,7 @@ client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 	client.user.setPresence({status: 'online', game: {name: 'with Ganymede'}});
 	enabledCommands.push(new UpdateCommand(client.guilds.find("id", "406877268556644363")));
+	UpdateRegistered.setSchedule();
 });
 
 enabledCommands.push(new AboutCommand());
