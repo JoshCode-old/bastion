@@ -1,9 +1,10 @@
 import * as request from "request-promise-native";
+import {version} from "../../app";
 
 export class OWAPI {
 
 	private static url: string = "https://owapi.net";
-	private static userAgent: string = `nl.codefox.bastion v${process.env.npm_package_version}`;
+	private static userAgent: string = `nl.codefox.bastion v${version}`;
 
 	public static requestStats(username: String): Promise<OWAPIResponseStats> {
 		return this.request(`/api/v3/u/${encodeURIComponent(username.toString())}/stats`);
