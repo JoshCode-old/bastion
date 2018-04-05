@@ -12,12 +12,6 @@ import {UpdateRegistered} from "./util/UpdateRegistered";
 
 // Set process title and exit handlers
 process.title = "B4ST10N";
-process.on("SIGINT", () => {
-	console.log("Received SIGINT");
-});
-process.on("SIGTERM", () => {
-	console.log("Received SIGTERM");
-});
 
 
 // Load config
