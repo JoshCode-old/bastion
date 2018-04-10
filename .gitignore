@@ -1,6 +1,22 @@
-.idea
+# Ignore IntelliJ IDEA files and folders
+*.idea
+*.iml
+*.ipr
+*.iws
+*.ids
+*.log
 
-node_modules/
+# Ignore Eclipse files and folders
+*.project
+*.settings
+*.classpath
 
-config/config.json
-build
+# Ignore NetBeans files and folders
+**/nbproject
+**/nb-configuration.xml
+
+# Ignore Maven files and folders
+**/target
+
+# Ignore config.json
+**/config.json

@@ -3,6 +3,5 @@
     "enabled": false,
     "debugChannel": "optional channel id of debug channel"
   },
-  "token": "bot secret token",
-  "databaseURL": "mongodb://ipaddress:port/B4ST10N"
+  "token": "bot secret token"
 }
