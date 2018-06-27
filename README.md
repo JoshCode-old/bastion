@@ -1,4 +1,4 @@
-B4ST10N
+bastion
 =======
 
 A Discord bot for certain Overwatch interactions

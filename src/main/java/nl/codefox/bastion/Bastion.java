@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import nl.codefox.bastion.command.AboutCommand;
+import nl.codefox.bastion.command.InfoCommand;
 import nl.codefox.bastion.listener.CommandListener;
 import nl.codefox.bastion.util.Logger;
 import org.json.JSONObject;
@@ -28,7 +29,8 @@ public class Bastion {
 			builder.setToken((String) config.get("token"));
 
 			commandListener = new CommandListener()
-					.registerCommand(new AboutCommand());
+					.registerCommand(new AboutCommand())
+					.registerCommand(new InfoCommand());
 
 			builder.addEventListener(commandListener);
 
@@ -42,5 +44,9 @@ public class Bastion {
 
 	public static JDA getJDA() {
 		return JDA_INSTANCE;
+	}
+
+	public static String getVersion() {
+		return "0.1.0";
 	}
 }

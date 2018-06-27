@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import nl.codefox.bastion.Bastion;
 import nl.codefox.bastion.util.BotEmbedBuilder;
 
 import java.util.Collections;
@@ -27,10 +28,10 @@ public class AboutCommand extends BotCommand {
 
 	@Override
 	public void process(String command, String[] args, TextChannel channel, User author, MessageReceivedEvent event) {
-		EmbedBuilder eb = new BotEmbedBuilder();
+		BotEmbedBuilder eb = new BotEmbedBuilder();
 
 		// TODO Dynamic version
-		eb.addField("Version", "0.1.0", false);
+		eb.addField("Version", Bastion.getVersion(), false);
 		eb.addField("GitHub", "https://github.com/joshcode/B4ST10N", false);
 
 		MessageBuilder mb = new MessageBuilder();

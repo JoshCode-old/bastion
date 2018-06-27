@@ -3,6 +3,7 @@ package nl.codefox.bastion.command;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import nl.codefox.bastion.util.Logger;
 
 import java.util.List;
 
@@ -10,6 +11,10 @@ import java.util.List;
  * @author Joshua Slik
  */
 public abstract class BotCommand {
+
+	public BotCommand() {
+		Logger.debug("Initialised command '" + getAliases().get(0) + "'");
+	}
 
 	public String getUsage() {
 		if (getAliases().size() > 1)
